@@ -5,7 +5,8 @@
 // type aliases tends to obfuscate code while offering no improvement in code cleanliness.
 #![allow(clippy::type_complexity)]
 
-use bevy::{prelude::*, winit::WinitSettings};
+use bevy::prelude::*;
+use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
 #[cfg(target_arch = "wasm32")]
 use web_sys::window;
@@ -50,9 +51,7 @@ fn button_system(
                 *color = PRESSED_BUTTON.into();
                 border_color.0 = Color::RED;
                 #[cfg(target_arch = "wasm32")]
-                if let Some(clipboard) = window().unwrap().navigator().clipboard() {
-                    clipboard.write_text(&"test");
-                }
+                copy_to_clipboard("Text to be copied");
             }
             Interaction::Hovered => {
                 text.sections[0].value = "Hover".to_string();
@@ -110,4 +109,15 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                     ));
                 });
         });
+}
+
+#[cfg(target_arch = "wasm32")]
+fn copy_to_clipboard(text: &str) {
+    #[wasm_bindgen]
+    extern "C" {
+        #[wasm_bindgen(js_namespace = ["navigator", "clipboard"], js_name = writeText)]
+        fn write_text(s: &str);
+    }
+
+    write_text(text);
 }
