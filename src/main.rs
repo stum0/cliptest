@@ -111,13 +111,23 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         });
 }
 
+// #[cfg(target_arch = "wasm32")]
+// fn copy_to_clipboard(text: &str) {
+//     #[wasm_bindgen]
+//     extern "C" {
+//         #[wasm_bindgen(js_namespace = ["navigator", "clipboard"], js_name = writeText)]
+//         fn write_text(s: &str);
+//     }
+
+//     write_text(text);
+// }
+
+#[wasm_bindgen]
+extern "C" {
+    fn copyToClipboard(text: &str);
+}
+
 #[cfg(target_arch = "wasm32")]
 fn copy_to_clipboard(text: &str) {
-    #[wasm_bindgen]
-    extern "C" {
-        #[wasm_bindgen(js_namespace = ["navigator", "clipboard"], js_name = writeText)]
-        fn write_text(s: &str);
-    }
-
-    write_text(text);
+    copyToClipboard(text);
 }

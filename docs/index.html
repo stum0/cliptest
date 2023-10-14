@@ -3,7 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>test</title>
-    <script type="module">import init from './cliptest-1b25031d4dbd9bd3.js';init('./cliptest-1b25031d4dbd9bd3_bg.wasm');</script>
+    <script type="module">import init from './cliptest-d1a3f9d91aaac85c.js';init('./cliptest-d1a3f9d91aaac85c_bg.wasm');</script>
     <style>
         body,
         html {
@@ -15,14 +15,23 @@
         }
     </style>
 
-<link rel="preload" href="./cliptest-1b25031d4dbd9bd3_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="./cliptest-1b25031d4dbd9bd3.js"></head>
+<link rel="preload" href="./cliptest-d1a3f9d91aaac85c_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="./cliptest-d1a3f9d91aaac85c.js"></head>
 
 <body>
     <script>
         document.addEventListener("contextmenu", function (e) {
             e.preventDefault();
         });
+
+        function copyToClipboard(text) {
+            var textarea = document.createElement("textarea");
+            document.body.appendChild(textarea);
+            textarea.value = text;
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
     </script>
 
 

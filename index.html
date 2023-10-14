@@ -24,6 +24,15 @@
         document.addEventListener("contextmenu", function (e) {
             e.preventDefault();
         });
+
+        function copyToClipboard(text) {
+            var textarea = document.createElement("textarea");
+            document.body.appendChild(textarea);
+            textarea.value = text;
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
     </script>
 </body>
 
