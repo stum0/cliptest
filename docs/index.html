@@ -13,6 +13,13 @@
             width: 100%;
             overflow: hidden;
         }
+
+        #copyButton {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     </style>
 
 <link rel="preload" href="./cliptest-be691677ac1d76d5_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
@@ -20,10 +27,10 @@
 
 <body>
 
-    <button id="copyButton" onclick="copyToClipboard()">Copy URL</button>
+    <button id="copyButton" onclick="copyToClipboard()">Share this URL to play <span id="url"></span></button>
 
     <script>
-
+        document.getElementById('url').textContent = window.location.href;
         async function copyToClipboard() {
             try {
                 // Use the Clipboard API to write the current URL to the clipboard
