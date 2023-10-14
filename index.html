@@ -34,10 +34,8 @@
         document.getElementById('url').textContent = window.location.href;
         async function copyToClipboard() {
             try {
-                // Use the Clipboard API to write the current URL to the clipboard
-                await navigator.clipboard.writeText(window.location.href);
 
-                // Optionally, notify the user that the URL was copied
+                await navigator.clipboard.writeText(window.location.href);
 
             } catch (err) {
                 console.error('Failed to copy URL: ', err);
