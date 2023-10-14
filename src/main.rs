@@ -124,10 +124,10 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
 
 #[wasm_bindgen]
 extern "C" {
-    fn copyToClipboard(text: &str);
+    fn copyToClipboardEvent(text: &str);
 }
 
-#[cfg(target_arch = "wasm32")]
-fn copy_to_clipboard(text: &str) {
-    copyToClipboard(text);
+#[wasm_bindgen]
+pub fn copy_to_clipboard(text: &str) {
+    copyToClipboardEvent(text);
 }
