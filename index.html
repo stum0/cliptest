@@ -25,20 +25,24 @@
             e.preventDefault();
         });
 
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                console.log('Text copied to clipboard');
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
+        }
+
+        // Listen to a custom event fired from your Rust+Wasm application
         document.addEventListener('copyToClipboardEvent', function (e) {
-            var text = e.detail;
-            var textarea = document.createElement("textarea");
-            document.body.appendChild(textarea);
-            textarea.value = text;
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
+            const text = e.detail;
+            copyToClipboard(text);
         });
 
-        function copyToClipboardEvent(text) {
-            var event = new CustomEvent('copyToClipboardEvent', { detail: text });
-            document.dispatchEvent(event);
-        }
+        // If the Rust+Wasm app exposes a global method, you might not need to emit events.
+        // Instead, the Rust code could call copyToClipboard directly (ensure it's global for that).
+        window.copyToClipboard = copyToClipboard;
 
     </script>
 </body>

@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>test</title>
-    <script
-        type="module">import init from './cliptest-41822cb6aa9fde1f.js'; init('./cliptest-41822cb6aa9fde1f_bg.wasm');</script>
+    <script type="module">import init from './cliptest-b84eb4e103fe8d57.js';init('./cliptest-b84eb4e103fe8d57_bg.wasm');</script>
     <style>
         body,
         html {
@@ -19,35 +15,36 @@
         }
     </style>
 
-    <link rel="preload" href="./cliptest-41822cb6aa9fde1f_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-    <link rel="modulepreload" href="./cliptest-41822cb6aa9fde1f.js">
-</head>
+<link rel="preload" href="./cliptest-b84eb4e103fe8d57_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="./cliptest-b84eb4e103fe8d57.js"></head>
 
 <body>
     <script>
-        // document.addEventListener("contextmenu", function (e) {
-        //     e.preventDefault();
-        // });
-
-        document.addEventListener('copyToClipboardEvent', function (e) {
-            var text = e.detail;
-            var textarea = document.createElement("textarea");
-            document.body.appendChild(textarea);
-            textarea.value = text;
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
         });
 
-        function copyToClipboardEvent(text) {
-            var event = new CustomEvent('copyToClipboardEvent', { detail: text });
-            document.dispatchEvent(event);
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                console.log('Text copied to clipboard');
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
         }
+
+        // Listen to a custom event fired from your Rust+Wasm application
+        document.addEventListener('copyToClipboardEvent', function (e) {
+            const text = e.detail;
+            copyToClipboard(text);
+        });
+
+        // If the Rust+Wasm app exposes a global method, you might not need to emit events.
+        // Instead, the Rust code could call copyToClipboard directly (ensure it's global for that).
+        window.copyToClipboard = copyToClipboard;
 
     </script>
 
 
 
-</body>
-
-</html>
+</body></html>

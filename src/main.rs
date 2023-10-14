@@ -50,8 +50,8 @@ fn button_system(
                 text.sections[0].value = "Press".to_string();
                 *color = PRESSED_BUTTON.into();
                 border_color.0 = Color::RED;
-                #[cfg(target_arch = "wasm32")]
-                copy_to_clipboard("Text to be copied");
+
+                copyToClipboard("Text to be copied");
             }
             Interaction::Hovered => {
                 text.sections[0].value = "Hover".to_string();
@@ -124,10 +124,10 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
 
 #[wasm_bindgen]
 extern "C" {
-    fn copyToClipboardEvent(text: &str);
+    fn copyToClipboard(text: &str);
 }
 
 #[wasm_bindgen]
-pub fn copy_to_clipboard(text: &str) {
-    copyToClipboardEvent(text);
+pub fn copy_text(text: &str) {
+    copyToClipboard(text);
 }
