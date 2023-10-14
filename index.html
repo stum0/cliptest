@@ -21,7 +21,7 @@
 
 <body>
 
-    <button onclick="copyToClipboard()">Copy URL</button>
+    <button id="copyButton" onclick="copyToClipboard()">Copy URL</button>
 
     <script>
 
@@ -37,7 +37,9 @@
             }
         }
 
-
+        function hideCopyButton() {
+            document.getElementById('copyButton').style.display = 'none';
+        }
     </script>
 </body>
 

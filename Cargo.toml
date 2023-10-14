@@ -7,15 +7,8 @@ edition = "2021"
 
 [dependencies]
 bevy = "0.11.3"
-web-sys = { version = "0.3.64", features = [
-    "Clipboard",
-    "Navigator",
-    "Location",
-    "HtmlButtonElement",
-    "HtmlParagraphElement",
-] }
 wasm-bindgen = "0.2.87"
-gloo = "0.10.0"
+
 
 
 [profile.release]

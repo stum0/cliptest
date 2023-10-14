@@ -3,7 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>test</title>
-    <script type="module">import init from './cliptest-90df111f16c553e.js';init('./cliptest-90df111f16c553e_bg.wasm');</script>
+    <script type="module">import init from './cliptest-be691677ac1d76d5.js';init('./cliptest-be691677ac1d76d5_bg.wasm');</script>
     <style>
         body,
         html {
@@ -15,12 +15,12 @@
         }
     </style>
 
-<link rel="preload" href="./cliptest-90df111f16c553e_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="./cliptest-90df111f16c553e.js"></head>
+<link rel="preload" href="./cliptest-be691677ac1d76d5_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="./cliptest-be691677ac1d76d5.js"></head>
 
 <body>
 
-    <button onclick="copyToClipboard()">Copy URL</button>
+    <button id="copyButton" onclick="copyToClipboard()">Copy URL</button>
 
     <script>
 
@@ -36,7 +36,9 @@
             }
         }
 
-
+        function hideCopyButton() {
+            document.getElementById('copyButton').style.display = 'none';
+        }
     </script>
 
 
